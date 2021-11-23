@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Project;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TaskFactory extends Factory
@@ -14,7 +15,10 @@ class TaskFactory extends Factory
     public function definition()
     {
         return [
-           'body' => $this->faker->paragraph(),
+           'body' => $this->faker->sentence(),
+           'project_id' => function(){
+               return Project::factory()->create()->id;
+           }
         ];
     }
 }
