@@ -92,7 +92,10 @@ class ProjectTasksTest extends TestCase
 
         $task = $project->addTask('Test task');
 
-        $attributes = ['body' => 'Changed', 'completed' => true];
+        $attributes = [
+            'body' => 'Changed', 
+            'completed' => true
+        ];
 
         $this->patch($task->path(), $attributes)
             ->assertStatus(403);

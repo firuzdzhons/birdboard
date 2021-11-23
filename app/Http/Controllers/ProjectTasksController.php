@@ -14,8 +14,7 @@ class ProjectTasksController extends Controller
             'body' => 'required'
         ]);
 
-        if(auth()->id() != $project->owner_id)
-            abort(403);
+        $this->authorize('update', $project);
             
         $project->addTask(request('body'));
         
@@ -24,8 +23,7 @@ class ProjectTasksController extends Controller
 
     public function update(Project $project, Task $task)
     {
-        if(auth()->id() != $project->owner_id)
-            abort(403);
+        $this->authorize('update', $task->project);
 
         $task->update([
             'body' => request('body'),
