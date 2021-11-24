@@ -6,7 +6,7 @@
             
             </h2>
 
-            <a href="/projects/create" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">New Project</a>
+            <a href="{{$project->path()}}/edit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit Project</a>
         </div>
     </header>
     
@@ -47,6 +47,17 @@
                         </textarea>
                         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Save</button>
                     </form>
+                    @if($errors->any())
+                        <div class="field mt-6">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li class="text-sm text-red-500">{{$error}}</li>
+                                @endforeach
+                            </ul>
+                    
+                        </div>
+
+                    @endif
                 </div>
             </div>
          

@@ -16,6 +16,7 @@ class ManageProjectsTest extends TestCase
     /** @test */
     public function guests_cannot_control_projects()
     {
+
         $project = Project::factory()->create();
 
         $this->post('/projects', $project->toArray())->assertRedirect('login');
@@ -62,8 +63,10 @@ class ManageProjectsTest extends TestCase
 
         $project = ProjectFactory::create();
 
+        $this->actingAs($project->owner)->get($project->path().'/edit')->assertOk();
+
         $this->actingAs($project->owner)  
-            ->patch($project->path(), $attributes = ['notes' => 'changed'])
+            ->patch($project->path(), $attributes = ['title' => 'changed', 'description' => 'changed', 'notes' => 'changed'])
             ->assertRedirect($project->path());
    
         $this->assertDatabaseHas('projects', $attributes);

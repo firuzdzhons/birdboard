@@ -1,8 +1,7 @@
 <x-app-layout>
+    <h1>New project</h1>
     <form method="POST" action="/projects">
         @csrf
-        <input type="text" name="title" placeholder="Input title"> 
-        <textarea name="description" cols="30" rows="10" placeholder="input textarea"></textarea>
-        <input type="submit" value="Save">
+        @include('projects.form', ['project' => new App\Models\Project, 'buttonText' => 'create'])
     </form>
 </x-app-layout>
