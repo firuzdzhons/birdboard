@@ -59,7 +59,7 @@ class ProjectTasksTest extends TestCase
     }
 
     /** @test */
-    public function a_task_can_be_update()
+    public function a_task_can_be_completed()
     {
         $project = ProjectFactory::withTasks(1)->create();
 
@@ -70,6 +70,22 @@ class ProjectTasksTest extends TestCase
 
         $this->assertDatabaseHas('tasks', $attributes);
     }
+
+
+      /** @test */
+      public function a_task_can_be_marked_as_incomplete()
+      {
+          $this->withoutExceptionHandling();
+          
+          $project = ProjectFactory::withTasks(1)->create();
+  
+          $attributes = ['body' => 'Changed', 'completed' => false];
+  
+          $this->actingAs($project->owner)
+              ->patch($project->tasks[0]->path(), $attributes);
+  
+          $this->assertDatabaseHas('tasks', $attributes);
+      }
 
      /** @test */
      public function only_the_owner_of_project_may_update_tasks()

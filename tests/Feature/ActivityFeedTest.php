@@ -50,7 +50,6 @@ class ActivityFeedTest extends TestCase
     }
 
     /** @test*/
-
     public function completing_a_new_task_records_project_activity()
     {
 
