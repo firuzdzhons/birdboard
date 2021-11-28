@@ -38,6 +38,6 @@ class Task extends Model
     {
         $this->update(['completed' => false]);
 
-        $this->project->recordActivity('task_marked_as_incomplete');
+        $this->project->recordActivity('incompleted_task');
     }
 }
